@@ -84,9 +84,10 @@ class Mangadex(MangaSiteExtractor):
         all_chapter_list = manga_info['chapter']
         ordered_chapter = {}
         for chapter_code, chapter_info in all_chapter_list.items():
-            chapter_index = float(chapter_info['chapter'])
-            if float(start) <= chapter_index <= float(end) and chapter_info['lang_code'] == 'gb':
-                ordered_chapter[chapter_index] = 'http://mangadex.org/chapter/' + chapter_code
+            if chapter_info['chapter'] != '':
+                chapter_index = float(chapter_info['chapter'])
+                if float(start) <= chapter_index <= float(end) and chapter_info['lang_code'] == 'gb':
+                     ordered_chapter[chapter_index] = 'http://mangadex.org/chapter/' + chapter_code
 
         ordered_chapter = OrderedDict(sorted(ordered_chapter.items()))
         return list(ordered_chapter.values())
