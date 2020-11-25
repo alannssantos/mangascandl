@@ -60,7 +60,7 @@ class BulkImageDownloader(threading.Thread):
             self.queue.task_done()
 
     def download_img(self, url, page_number):
-        filename = str(page_number) + ".jpg"
+        filename = str(page_number).zfill(3) + ".jpg"
         r = requests.get(url, stream=True)
         if r.status_code == 200:
             with open(self.destfolder + '/' + filename, 'wb') as f:
